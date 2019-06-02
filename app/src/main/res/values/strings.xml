@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Petters.</string>
+    <string name="signup_fullname">Full name</string>
+    <string name="signup_fullname_placeholder">Jean Hot</string>
+    <string name="signup_email_adress">Email adress</string>
+    <string name="signup_email_adress_placeholder">jean.hot@porno.com</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_password_placeholder">azeuzarizarizr</string>
+    <string name="signup_password_confirmation">Confirm your password</string>
+    <string name="signup_password_confirmation_placeholder">azeuzarizarizr</string>
+    <string name="signup_create_account_button">Create account</string>
+    <string name="signup_already_have_account">You already have an account?</string>
+    <string name="signup_already_have_account_login">Login</string>
+
 </resources>
