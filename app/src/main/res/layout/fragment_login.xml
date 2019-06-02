@@ -27,61 +27,80 @@
             android:layout_marginRight="30dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="40dp" app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintBottom_toTopOf="@+id/button">
+            app:layout_constraintBottom_toTopOf="@+id/login_validation_button">
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="426dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp">
             <TextView
-                    android:text="@string/signup_email_adress"
+                    android:text="@string/login_email_adress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signup_email_adress"
+                    android:id="@+id/login_email_adress"
                     android:textAppearance="@style/form_label"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_email_adress_field"
+                    app:layout_constraintBottom_toTopOf="@+id/login_email_adress_field"
                     android:layout_marginStart="3dp"/>
-            <EditText
+            <TextView
+                    android:text="@string/login_no_email"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_no_email"
+                    android:textAppearance="@style/form_error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
+            <EditText
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/signup_email_adress_field"
-                    android:hint="@string/signup_email_adress_placeholder"
+                    android:id="@+id/login_email_adress_field"
+                    android:hint="@string/login_email_adress_placeholder"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="426dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp">
             <TextView
-                    android:text="@string/signup_password"
+                    android:text="@string/login_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signup_password"
+                    android:id="@+id/login_password"
                     android:textAppearance="@style/form_label"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_password_field" android:layout_marginStart="3dp"/>
+                    app:layout_constraintBottom_toTopOf="@+id/login_password_field" android:layout_marginStart="3dp"/>
             <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:id="@+id/signup_password_field"
-                    android:hint="@string/signup_password_placeholder"
+                    android:id="@+id/login_password_field"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    android:text="@string/login_no_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_no_password"
+                    android:textAppearance="@style/form_error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp" app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/constraintLayout2"
-            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/button">
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/login_validation_button">
         <TextView
                 android:text="@string/login_create_account_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/signup_already_have_account"
+                android:layout_height="wrap_content" android:id="@+id/login_create_account_text"
                 android:textAppearance="@style/littleGreyText"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
@@ -89,17 +108,17 @@
         <TextView
                 android:text="@string/login_create_account_click"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/signup_already_have_account_login"
+                android:layout_height="wrap_content" android:id="@+id/login_create_account_click"
                 android:textAppearance="@style/littleOrangeText"
                 android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/signup_already_have_account"/>
+                app:layout_constraintTop_toBottomOf="@+id/login_create_account_text"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
             android:text="@string/login_create_account_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/button"
+            android:layout_height="wrap_content" android:id="@+id/login_validation_button"
             android:background="@drawable/button" android:textAppearance="@style/validate_button"
             tools:layout_editor_absoluteX="30dp"
             android:layout_marginLeft="30dp"

@@ -5,12 +5,13 @@
     <string name="signup_email_adress">Email adress</string>
     <string name="signup_email_adress_placeholder">jean.hot@porno.com</string>
     <string name="signup_password">Password</string>
-    <string name="signup_password_placeholder">azeuzarizarizr</string>
-    <string name="signup_password_confirmation">Confirm your password</string>
-    <string name="signup_password_confirmation_placeholder">azeuzarizarizr</string>
+    <string name="signup_password_confirmation">Confirm password</string>
     <string name="signup_create_account_button">Create account</string>
     <string name="signup_already_have_account">You already have an account?</string>
     <string name="signup_already_have_account_login">Login</string>
+    <string name="signup_no_name">Name Empty</string>
+    <string name="signup_no_password">Password Empty</string>
+    <string name="signup_no_email">Email Empty</string>
     <string name="login_email_adress">Email adress</string>
     <string name="login_email_adress_placeholder">jean.hot@porno.com</string>
     <string name="login_password">Password</string>
@@ -18,4 +19,6 @@
     <string name="login_create_account_button">Login</string>
     <string name="login_create_account_text">New to Petters?</string>
     <string name="login_create_account_click">Create an account</string>
+    <string name="login_no_email">Email Empty</string>
+    <string name="login_no_password">Password Empty</string>
 </resources>
