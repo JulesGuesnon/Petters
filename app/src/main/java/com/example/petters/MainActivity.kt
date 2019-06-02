@@ -1,78 +1,63 @@
 package com.example.petters
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var menu: Menu
-
-    var route = "/"
+    val router = Router()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         setSupportActionBar(findViewById(R.id.my_toolbar))
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dog_main_color_24dp)
 
-        if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dog_main_color_24dp)
-        }
+        router.supportFragmentManager = supportFragmentManager
+        router.supportActionBar = supportActionBar!!
+        router.fragmentContainer = fragmentContainer
+
         supportFragmentManager
             .beginTransaction()
             .add(fragmentContainer.id, MainFragment.newInstance())
-            .addToBackStack("init")
             .commit()
+
+        FirebaseAuth.getInstance().signInWithEmailAndPassword("salut@les.amis", "testtest")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
-        this.menu = menu!!
+        router.menu = menu!!
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         if (item?.itemId ==  R.id.navChat) {
-            route = "/chat"
-            setBackMenu()
+            router.goTo("/chat")
         }
         else {
-           when(route) {
-               "/" -> {
-                   route = "/profile"
-                   setBackMenu()
-               }
-               "/chat" -> {
-                   route = "/"
-                   setHomeMenu()
-               }
-               "/inChat" -> {
-                   route = "/chat"
-               }
-               "/profile" -> {
-                   route = "/"
-                   setHomeMenu()
-               }
+           when(router.route) {
+               "/" -> router.goTo("/profile")
+               "/profile" -> router.goTo("/")
+               "/chat" -> router.goTo("/")
+               "/conversation" -> router.goTo("/chat")
            }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    fun setBackMenu() {
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_main_color_24dp)
-        menu.findItem(R.id.navChat).isVisible = false
-    }
-
-    fun setHomeMenu() {
-        menu.findItem(R.id.navChat).isVisible = true
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dog_main_color_24dp)
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show()
     }
 }
