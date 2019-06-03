@@ -2,7 +2,7 @@
     <string name="app_name">Petters.</string>
     <string name="signup_fullname">Full name</string>
     <string name="signup_fullname_placeholder">Jean Hot</string>
-    <string name="signup_email_adress">Email adress</string>
+    <string name="signup_email_adress">Email address</string>
     <string name="signup_email_adress_placeholder">jean.hot@porno.com</string>
     <string name="signup_password">Password</string>
     <string name="signup_password_confirmation">Confirm password</string>
@@ -12,7 +12,7 @@
     <string name="signup_no_name">Name Empty</string>
     <string name="signup_no_password">Password Empty</string>
     <string name="signup_no_email">Email Empty</string>
-    <string name="login_email_adress">Email adress</string>
+    <string name="login_email_adress">Email address</string>
     <string name="login_email_adress_placeholder">jean.hot@porno.com</string>
     <string name="login_password">Password</string>
     <string name="login_password_placeholder">azeuzarizarizr</string>
@@ -21,4 +21,5 @@
     <string name="login_create_account_click">Create an account</string>
     <string name="login_no_email">Email Empty</string>
     <string name="login_no_password">Password Empty</string>
+    <string name="alert_dialog_validation_fun">Woops, got it!</string>
 </resources>
