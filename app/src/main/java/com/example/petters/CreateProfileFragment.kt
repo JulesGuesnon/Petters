@@ -7,18 +7,29 @@ import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import java.util.*
 import android.content.DialogInterface
 import android.content.Intent
-import android.widget.Button
+import android.graphics.Bitmap
+import android.net.Uri
+import android.widget.*
+import java.io.IOException
+import android.widget.Toast
+import android.provider.MediaStore
+import android.media.MediaScannerConnection
+import android.os.Environment
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import java.nio.file.Files.exists
+import android.os.Environment.getExternalStorageDirectory
+import android.util.Log
+import kotlinx.android.synthetic.main.fragment_createprofile.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 
 
 class CreateProfileFragment: Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_createprofile, container, false)
 
@@ -65,7 +76,7 @@ class CreateProfileFragment: Fragment() {
             // Apply the adapter to the spinner
             genderSpinner.adapter = adapter
         }
-        val cameraButton = view.findViewById<Button>(R.id.create_profile_validate_button)
+        val cameraButton = view.findViewById<ImageButton>(R.id.create_profile_add_picture)
         cameraButton.setOnClickListener(){
             showPictureDialog()
         }
@@ -73,6 +84,8 @@ class CreateProfileFragment: Fragment() {
 
 }
 
+    private val GALLERY = 1
+    private val CAMERA = 2
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(activity)
@@ -94,13 +107,15 @@ class CreateProfileFragment: Fragment() {
             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
 
-       // startActivityForResult(galleryIntent, GALLERY)
+       startActivityForResult(galleryIntent, GALLERY)
     }
 
     private fun takePhotoFromCamera() {
         val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-       // startActivityForResult(intent, CAMERA)
+       startActivityForResult(intent, CAMERA)
     }
+
+
 
 
     companion object {
@@ -109,4 +124,67 @@ class CreateProfileFragment: Fragment() {
             return CreateProfileFragment()
         }
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                val contentURI = data.data
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver(), contentURI)
+                    val path = saveImage(bitmap)
+                    Toast.makeText(activity, "Image Saved!", Toast.LENGTH_SHORT).show()
+                    create_profile_add_picture.setImageBitmap(bitmap)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Toast.makeText(activity, "Failed!", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+        } else if (requestCode == CAMERA) {
+            val thumbnail = data!!.extras!!.get("data") as Bitmap
+            create_profile_add_picture.setImageBitmap(thumbnail)
+            saveImage(thumbnail)
+            Toast.makeText(activity, "Image Saved!", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun saveImage(myBitmap: Bitmap): String {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val wallpaperDirectory = File(
+            Environment.getExternalStorageDirectory().path + "petters/profile/img"
+        )
+        // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs()
+        }
+
+        try {
+            val f = File(
+                wallpaperDirectory, Calendar.getInstance()
+                    .timeInMillis.toString() + ".jpg"
+            )
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(
+                activity,
+                arrayOf(f.getPath()),
+                arrayOf("image/jpeg"), null
+            )
+            fo.close()
+            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
+
+            return f.getAbsolutePath()
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return ""
+    }
+
+
 }
