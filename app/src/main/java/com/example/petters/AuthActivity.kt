@@ -21,7 +21,7 @@ class AuthActivity: AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(auth_fragmentContainer.id, LoginFragment.newInstance())
+            .add(auth_fragmentContainer.id, LandingFragment.newInstance())
             .commit()
     }
 }
