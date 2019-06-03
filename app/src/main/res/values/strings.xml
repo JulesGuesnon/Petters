@@ -39,6 +39,10 @@
     <string name="create_profile_no_type">Type Empty</string>
     <string name="create_profile_no_gender">Gender Empty</string>
     <string name="create_profile_no_pic">No picture</string>
+    <string name="edit_profile_save_modifications">Save</string>
+    <string name="edit_profile_logout">Logout</string>
+    <string name="edit_profile_delete_account">Delete my account</string>
+    <string name="edit_profile_name">Toutou</string>
     <string-array name="type_array">
         <item>Doggo</item>
         <item>Kitty Cat</item>

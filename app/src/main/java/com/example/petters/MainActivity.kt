@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(fragmentContainer.id, MainFragment.newInstance())
+            .add(fragmentContainer.id, LandingFragment.newInstance())
             .commit()
     }
 
