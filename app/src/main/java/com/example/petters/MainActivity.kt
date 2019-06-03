@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(fragmentContainer.id, MainFragment.newInstance())
             .commit()
-
-        FirebaseAuth.getInstance().signInWithEmailAndPassword("salut@les.amis", "testtest")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

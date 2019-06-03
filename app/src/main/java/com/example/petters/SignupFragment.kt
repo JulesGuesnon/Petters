@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import models.User
+import models.SignUpUser
 
 class SignupFragment: Fragment() {
 
@@ -30,6 +30,15 @@ class SignupFragment: Fragment() {
 
         val passwordSecond = view.findViewById<EditText>(R.id.signup_password_confirmation_field)
         val passwordSecondEmpty = view.findViewById<TextView>(R.id.signup_no_password_second)
+
+        val login = view.findViewById<Button>(R.id.signup_create_account_click)
+
+        login.setOnClickListener {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.auth_fragmentContainer, LoginFragment.newInstance())
+                .commit()
+        }
 
         nameEmpty.visibility = View.INVISIBLE
         emailEmpty.visibility = View.INVISIBLE
@@ -87,7 +96,12 @@ class SignupFragment: Fragment() {
                     .addOnSuccessListener {
                         val uid = it.user.uid
                         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-                        ref.setValue(User(uid, name.text.toString()))
+                        ref.setValue(SignUpUser(uid, name.text.toString()))
+
+                        fragmentManager!!
+                            .beginTransaction()
+                            .replace(R.id.auth_fragmentContainer, CreateProfileFragment.newInstance())
+                            .commit()
                     }
 
             }
