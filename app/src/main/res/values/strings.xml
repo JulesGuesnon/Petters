@@ -22,4 +22,32 @@
     <string name="login_no_email">Email Empty</string>
     <string name="login_no_password">Password Empty</string>
     <string name="alert_dialog_validation_fun">Woops, got it!</string>
+    <string name="create_profile_name">Name</string>
+    <string name="create_profile_name_placeholder">Toutou</string>
+    <string name="create_profile_description">Description</string>
+    <string name="create_profile_description_placeholder">My pet is sooooo cute</string>
+    <string name="create_profile_birth_date">Date of birth</string>
+    <string name="create_profile_birth_date_placeholder">03/03/18</string>
+    <string name="create_profile_type">Type</string>
+    <string name="create_profile_type_placeholder">Doggo</string>
+    <string name="create_profile_gender">Gender</string>
+    <string name="create_profile_genre_placeholder">Male</string>
+    <string name="create_profile_validate">Add my pet</string>
+    <string name="create_profile_no_name">Name Empty</string>
+    <string name="create_profile_no_description">Description Empty</string>
+    <string name="create_profile_no_birth_date">Birth Date Empty</string>
+    <string name="create_profile_no_type">Type Empty</string>
+    <string name="create_profile_no_gender">Gender Empty</string>
+    <string-array name="type_array">
+        <item>Doggo</item>
+        <item>Meow Meow</item>
+        <item>Bunny</item>
+        <item>Fish</item>
+    </string-array>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Non-Binary</item>
+        <item>Other</item>
+    </string-array>
 </resources>

@@ -42,6 +42,10 @@ dependencies {
     implementation 'com.mikepenz:fastadapter-commons:3.3.1'
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    // Permissions management
+    implementation 'com.karumi:dexter:5.0.0'
+
 }
 
 
