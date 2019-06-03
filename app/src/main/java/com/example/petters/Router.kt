@@ -16,7 +16,7 @@ class Router {
     lateinit var supportFragmentManager: FragmentManager
     lateinit var fragmentContainer: LinearLayout
 
-    fun goTo(newRoute: String)  {
+    fun goTo(newRoute: String, arg: Any = "")  {
         when(newRoute) {
             "/" -> {
                 if (route == "/profile")
@@ -44,7 +44,7 @@ class Router {
                 supportFragmentManager
                     .beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(fragmentContainer.id, ConversationFragment.newInstance())
+                    .replace(fragmentContainer.id, ConversationFragment.newInstance(arg.toString()))
                     .addToBackStack("test")
                     .commit()
             }

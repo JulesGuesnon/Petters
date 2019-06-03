@@ -4,7 +4,11 @@
     <color name="colorPrimaryDark">#40403E</color>
     <color name="colorAccent">#F9C833</color>
     <color name="colorRed">#FF2E63</color>
+    <color name="colorRedDarken">#C3254D</color>
+    <color name="colorGreen">#2DE6B0</color>
+    <color name="colorGreenDarken">#1DAB82</color>
     <color name="colorText">#40403E</color>
     <color name="colorBright">#FFFFFF</color>
     <color name="colorGrey">#A8A8A8</color>
+    <color name="colorMessageOther">#F1F1F0</color>
 </resources>

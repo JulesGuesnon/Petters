@@ -8,6 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import models.User
@@ -17,6 +22,11 @@ class ChatFragment(val router: Router): Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
+        FirebaseAuth.getInstance().signInWithEmailAndPassword("hihi@hihi.fr", "aaaaaa")
+            .addOnCompleteListener {
+                println(it.result?.user?.uid)
+            }
+
         val recycler = view.findViewById<RecyclerView>(R.id.chat_recycler)
 
         val layout = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -24,24 +34,41 @@ class ChatFragment(val router: Router): Fragment() {
         val fastAdapter = FastAdapter.with<ChatUserItem, ItemAdapter<ChatUserItem>>(itemAdapter)
 
         fastAdapter.withOnClickListener { _, _, adapter, _ ->
-            router.goTo("/conversation")
+            router.goTo("/conversation", adapter.user.uid)
             true
         }
 
         recycler.layoutManager = layout
         recycler.adapter = fastAdapter
 
-        itemAdapter.add(
-            ChatUserItem(User("azezaeaze", "Jules"))
-        )
+        FirebaseDatabase.getInstance().getReference("/users")
+            .addChildEventListener(object: ChildEventListener {
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    return
+                }
 
-        itemAdapter.add(
-            ChatUserItem(User("azezaeaze", "Yoan"))
-        )
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    return
+                }
 
-        itemAdapter.add(
-            ChatUserItem(User("azezaeaze", "Baton"))
-        )
+                override fun onChildAdded(item: DataSnapshot, p1: String?) {
+                    val user = item.getValue(User::class.java)
+                    if (user == null) return
+                    println(user)
+                    itemAdapter.add(
+                        ChatUserItem(user)
+                    )
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    return
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    return
+                }
+
+            })
         return view
     }
 

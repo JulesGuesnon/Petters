@@ -19,7 +19,7 @@ class ChatUserViewHolder(itemView: View): FastAdapter.ViewHolder<ChatUserItem>(i
     }
 
     override fun bindView(item: ChatUserItem, payloads: MutableList<Any>) {
-        username.text = item.message.name.toString()
+        username.text = item.user.name.toString()
         lastMsg.text = (Math.random() * 12).toString()
         time.text = (Math.random() * 100).toString()
     }
@@ -31,7 +31,7 @@ class ChatUserViewHolder(itemView: View): FastAdapter.ViewHolder<ChatUserItem>(i
     }
 }
 
-class ChatUserItem(val message: User): AbstractItem<ChatUserItem, ChatUserViewHolder>() {
+class ChatUserItem(val user: User): AbstractItem<ChatUserItem, ChatUserViewHolder>() {
     override fun getType() = 0
 
     override fun getViewHolder(v: View) = ChatUserViewHolder(v)

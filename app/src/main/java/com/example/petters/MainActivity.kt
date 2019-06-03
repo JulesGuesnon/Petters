@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(fragmentContainer.id, SignupFragment.newInstance())
+            .add(fragmentContainer.id, MainFragment.newInstance())
             .commit()
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword("salut@les.amis", "testtest")
