@@ -23,6 +23,7 @@ import com.google.android.gms.common.util.IOUtils.toByteArray
 import java.nio.file.Files.exists
 import android.os.Environment.getExternalStorageDirectory
 import android.util.Log
+import androidx.core.app.ActivityCompat.startActivityForResult
 import kotlinx.android.synthetic.main.fragment_createprofile.*
 import kotlinx.android.synthetic.main.fragment_createprofile.view.*
 import java.io.ByteArrayOutputStream
@@ -119,12 +120,12 @@ class CreateProfileFragment: Fragment() {
             } else {
                 dateOfBirthEmpty.visibility = View.INVISIBLE
             }
-            if (profilePic.getTag(1) != "null") {
-                profilePicEmpty.visibility = View.VISIBLE
-                println(profilePic.getTag(1))
-            } else {
-                profilePicEmpty.visibility = View.INVISIBLE
-            }
+            //if (profilePic.getTag(1) != "null") {
+                //profilePicEmpty.visibility = View.VISIBLE
+                //println(profilePic.getTag(1))
+            //} else {
+                //profilePicEmpty.visibility = View.INVISIBLE
+            //}
         }
 
         return view
@@ -182,8 +183,8 @@ class CreateProfileFragment: Fragment() {
                     val bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver(), contentURI)
                     val path = saveImage(bitmap)
                     create_profile_add_picture.setImageBitmap(bitmap)
-                    create_profile_add_picture.setTag(1, "Pic imported")
-                    println(create_profile_add_picture.getTag(1))
+                    //create_profile_add_picture.setTag(1, "Pic imported")
+                    //println(create_profile_add_picture.getTag(1))
 
                 } catch (e: IOException) {
                     e.printStackTrace()

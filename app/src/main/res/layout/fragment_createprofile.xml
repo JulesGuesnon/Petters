@@ -166,6 +166,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/create_profile_type_placeholder"
                         android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
                 <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -188,6 +189,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/create_profile_gender_placeholder"
                         android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
                 <Spinner
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"

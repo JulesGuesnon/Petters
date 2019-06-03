@@ -41,9 +41,29 @@
     <string name="create_profile_no_pic">No picture</string>
     <string-array name="type_array">
         <item>Doggo</item>
-        <item>Meow Meow</item>
+        <item>Kitty Cat</item>
         <item>Bunny</item>
         <item>Fish</item>
+        <item>Mouse</item>
+        <item>Guinea Pig</item>
+        <item>Rat</item>
+        <item>Hamster</item>
+        <item>Chinchilla</item>
+        <item>Octodon</item>
+        <item>Korean Squirrel</item>
+        <item>Gerbil</item>
+        <item>Ferret</item>
+        <item>Snake</item>
+        <item>Spider</item>
+        <item>Turtle</item>
+        <item>Horse</item>
+        <item>Axolotl</item>
+        <item>Parrot</item>
+        <item>Lizard</item>
+        <item>Chameleon</item>
+        <item>Sugar Glider</item>
+        <item>Pig</item>
+        <item>Flying Squirrel</item>
     </string-array>
     <string-array name="gender_array">
         <item>Male</item>
