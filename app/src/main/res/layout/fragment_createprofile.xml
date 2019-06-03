@@ -1,209 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/create_profile_global_constraint">
-
-    <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Button"
-            android:src="@drawable/camera_logo"
-            android:id="@+id/create_profile_add_picture"
-            app:layout_constraintBottom_toTopOf="@id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="9dp"
-            android:layout_marginBottom="32dp" app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/create_profile_add_picture"/>
-    <LinearLayout
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:verticalScrollbarPosition="right"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/create_profile_validate_button"
-    >
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-            <TextView
-                    android:text="@string/create_profile_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_name"
-                    android:textAppearance="@style/form_label"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/create_profile_name_field"
-                    android:layout_marginStart="3dp"/>
-            <TextView
-                    android:text="@string/create_profile_no_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_noname"
-                    android:textAppearance="@style/form_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-            <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/create_profile_name_field"
-                    android:hint="@string/create_profile_name_placeholder"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-            <TextView
-                    android:text="@string/create_profile_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_description"
-                    android:textAppearance="@style/form_label"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/create_profile_description_field"
-                    android:layout_marginStart="3dp"/>
-            <TextView
-                    android:text="@string/create_profile_no_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_nodescription"
-                    android:textAppearance="@style/form_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-            <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="textLongMessage"
-                    android:ems="10"
-                    android:id="@+id/create_profile_description_field"
-                    android:hint="@string/create_profile_description_placeholder"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-            <TextView
-                    android:text="@string/create_profile_birth_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_birth_date"
-                    android:textAppearance="@style/form_label"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/create_profile_birth_date_placeholder"
-                    android:layout_marginStart="3dp"/>
-            <TextView
-                    android:text="@string/create_profile_no_birth_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_nobirth_date"
-                    android:textAppearance="@style/form_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-            <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/create_profile_birth_date_placeholder"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:inputType="none"
-                    android:focusableInTouchMode="false"
-                    android:clickable="true"
-                    android:hint="@string/create_profile_birth_date_placeholder"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-            <TextView
-                    android:text="@string/create_profile_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_type"
-                    android:textAppearance="@style/form_label"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/create_profile_type_placeholder"
-                    android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
-            <TextView
-                    android:text="@string/create_profile_no_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_notype"
-                    android:textAppearance="@style/form_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-            <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/create_profile_type_placeholder"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp">
-            <TextView
-                    android:text="@string/create_profile_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_gender"
-                    android:textAppearance="@style/form_label"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/create_profile_gender_placeholder"
-                    android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
-            <TextView
-                    android:text="@string/create_profile_no_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/create_profile_nogender"
-                    android:textAppearance="@style/form_error"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-            <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:id="@+id/create_profile_gender_placeholder"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintHeight_max="300dp"
+            app:layout_constrainedHeight="true"
+            android:paddingBottom = "20dp"
+            android:paddingTop = "20dp"
+            android:id="@+id/create_profile_global_constraint">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-    <Button
-            android:text="@string/create_profile_validate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/create_profile_validate_button"
-            android:background="@drawable/button" android:textAppearance="@style/validate_button"
-            tools:layout_editor_absoluteX="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/camera_logo"
+                android:id="@+id/create_profile_add_picture"
+                app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="9dp"
+                android:layout_marginBottom="32dp" app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/create_profile_add_picture"/>
+        <TextView
+                android:text="@string/create_profile_no_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/create_profile_nopic"
+                android:textAppearance="@style/form_error"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/create_profile_add_picture"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout2"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/create_profile_validate_button"
+        >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/create_profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_name"
+                        android:textAppearance="@style/form_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/create_profile_name_field"
+                        android:layout_marginStart="3dp"/>
+                <TextView
+                        android:text="@string/create_profile_no_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_noname"
+                        android:textAppearance="@style/form_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/create_profile_name_field"
+                        android:hint="@string/create_profile_name_placeholder"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/create_profile_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_description"
+                        android:textAppearance="@style/form_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/create_profile_description_field"
+                        android:layout_marginStart="3dp"/>
+                <TextView
+                        android:text="@string/create_profile_no_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_nodescription"
+                        android:textAppearance="@style/form_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textLongMessage"
+                        android:ems="10"
+                        android:id="@+id/create_profile_description_field"
+                        android:hint="@string/create_profile_description_placeholder"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/create_profile_birth_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_birth_date"
+                        android:textAppearance="@style/form_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/create_profile_birth_date_placeholder"
+                        android:layout_marginStart="3dp"/>
+                <TextView
+                        android:text="@string/create_profile_no_birth_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_nobirth_date"
+                        android:textAppearance="@style/form_error"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/create_profile_birth_date_placeholder"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:inputType="none"
+                        android:focusableInTouchMode="false"
+                        android:clickable="true"
+                        android:hint="@string/create_profile_birth_date_placeholder"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/create_profile_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_type"
+                        android:textAppearance="@style/form_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/create_profile_type_placeholder"
+                        android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
+                <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/create_profile_type_placeholder"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/create_profile_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_profile_gender"
+                        android:textAppearance="@style/form_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/create_profile_gender_placeholder"
+                        android:layout_marginStart="3dp" android:layout_marginBottom="20dp"/>
+                <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:id="@+id/create_profile_gender_placeholder"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <Button
+                android:text="@string/create_profile_validate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/create_profile_validate_button"
+                android:background="@drawable/button" android:textAppearance="@style/validate_button"
+                tools:layout_editor_absoluteX="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

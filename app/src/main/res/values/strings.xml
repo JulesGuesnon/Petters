@@ -38,6 +38,7 @@
     <string name="create_profile_no_birth_date">Birth Date Empty</string>
     <string name="create_profile_no_type">Type Empty</string>
     <string name="create_profile_no_gender">Gender Empty</string>
+    <string name="create_profile_no_pic">No picture</string>
     <string-array name="type_array">
         <item>Doggo</item>
         <item>Meow Meow</item>

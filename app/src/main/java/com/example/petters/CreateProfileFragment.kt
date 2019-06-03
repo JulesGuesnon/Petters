@@ -24,6 +24,7 @@ import java.nio.file.Files.exists
 import android.os.Environment.getExternalStorageDirectory
 import android.util.Log
 import kotlinx.android.synthetic.main.fragment_createprofile.*
+import kotlinx.android.synthetic.main.fragment_createprofile.view.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -31,7 +32,24 @@ import java.io.FileOutputStream
 
 class CreateProfileFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         val view = inflater.inflate(R.layout.fragment_createprofile, container, false)
+
+        val name = view.findViewById<EditText>(R.id.create_profile_name_field)
+        val nameEmpty = view.findViewById<TextView>(R.id.create_profile_noname)
+        nameEmpty.visibility = View.INVISIBLE
+
+        val description = view.findViewById<EditText>(R.id.create_profile_description_field)
+        val descriptionEmpty = view.findViewById<TextView>(R.id.create_profile_nodescription)
+        descriptionEmpty.visibility = View.INVISIBLE
+
+        val dateOfBirth = view.findViewById<EditText>(R.id.create_profile_birth_date_placeholder)
+        val dateOfBirthEmpty = view.findViewById<TextView>(R.id.create_profile_nobirth_date)
+        dateOfBirthEmpty.visibility = View.INVISIBLE
+
+        val profilePic = view.findViewById<ImageButton>(R.id.create_profile_add_picture)
+        val profilePicEmpty = view.findViewById<TextView>(R.id.create_profile_nopic)
+        profilePicEmpty.visibility = View.INVISIBLE
 
         val calendar = view.findViewById<EditText>(R.id.create_profile_birth_date_placeholder)
         calendar.setOnClickListener{
@@ -76,10 +94,39 @@ class CreateProfileFragment: Fragment() {
             // Apply the adapter to the spinner
             genderSpinner.adapter = adapter
         }
+
         val cameraButton = view.findViewById<ImageButton>(R.id.create_profile_add_picture)
         cameraButton.setOnClickListener(){
             showPictureDialog()
         }
+
+
+        // Validate trigger and integrity control
+        view.findViewById<Button>(R.id.create_profile_validate_button).setOnClickListener() {
+            if (name.text.isEmpty()) {
+                nameEmpty.visibility = View.VISIBLE
+            } else {
+                nameEmpty.visibility = View.INVISIBLE
+            }
+            if (description.text.isEmpty()) {
+                descriptionEmpty.visibility = View.VISIBLE
+            } else {
+                descriptionEmpty.visibility = View.INVISIBLE
+
+            }
+            if (dateOfBirth.text.isEmpty()) {
+                dateOfBirthEmpty.visibility = View.VISIBLE
+            } else {
+                dateOfBirthEmpty.visibility = View.INVISIBLE
+            }
+            if (profilePic.getTag(1) != "null") {
+                profilePicEmpty.visibility = View.VISIBLE
+                println(profilePic.getTag(1))
+            } else {
+                profilePicEmpty.visibility = View.INVISIBLE
+            }
+        }
+
         return view
 
 }
@@ -134,12 +181,13 @@ class CreateProfileFragment: Fragment() {
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(activity?.getContentResolver(), contentURI)
                     val path = saveImage(bitmap)
-                    Toast.makeText(activity, "Image Saved!", Toast.LENGTH_SHORT).show()
                     create_profile_add_picture.setImageBitmap(bitmap)
+                    create_profile_add_picture.setTag(1, "Pic imported")
+                    println(create_profile_add_picture.getTag(1))
 
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    Toast.makeText(activity, "Failed!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Image Import failed :/", Toast.LENGTH_SHORT).show()
                 }
 
             }
