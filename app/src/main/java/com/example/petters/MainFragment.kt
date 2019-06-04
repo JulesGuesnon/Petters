@@ -8,15 +8,21 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.yuyakaido.android.cardstackview.*
 import models.Card
+import models.User
 
 class MainFragment: Fragment(), CardStackListener {
 
     lateinit var cardStackView: CardStackView
     lateinit var manager: CardStackLayoutManager
+    var users = mutableListOf<Card>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hello, container, false)
@@ -53,17 +59,44 @@ class MainFragment: Fragment(), CardStackListener {
         cardStackView.layoutManager = manager
         cardStackView.adapter = fastAdapter
 
-        val users = listOf(
-            CardItem(Card("0", "SUDO LE CHIEN")),
-            CardItem(Card("12", "SUDO LE CHIEN")),
-            CardItem(Card("23", "SUDO LE CHIEN")),
-            CardItem(Card("34", "SUDO LE CHIEN")),
-            CardItem(Card("40", "SUDO LE CHIEN"))
-        )
 
-        users.forEach {
-            itemAdapter.add(it)
-        }
+        FirebaseDatabase
+            .getInstance()
+            .getReference("/users")
+            .addChildEventListener(object: ChildEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    return
+                }
+
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    return
+                }
+
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    return
+                }
+
+                override fun onChildAdded(data: DataSnapshot, p1: String?) {
+                    val user = data.getValue(User::class.java)
+
+                    if (user == null) return
+
+                    val card = Card(
+                        uid = user.uid,
+                        name = user.petName,
+                        image = user.profilePicture,
+                        description = user.petDescription
+                    )
+
+                    itemAdapter.add(CardItem(card))
+                    users.add(card)
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    return
+                }
+
+            })
 
         return view
     }
@@ -102,7 +135,10 @@ class MainFragment: Fragment(), CardStackListener {
     }
 
     fun likeUser() {
-        println(manager.topPosition)
-        println(manager.topView)
+        println(
+            users[
+                manager.topPosition - 1
+            ]
+        )
     }
 }

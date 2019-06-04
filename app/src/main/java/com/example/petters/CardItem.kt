@@ -12,14 +12,17 @@ class CardItemViewHolder(itemView: View): FastAdapter.ViewHolder<CardItem>(itemV
 
     val image: ImageView
     val name: TextView
+    val desc: TextView
 
     init {
         image = itemView.findViewById(R.id.main_image)
         name = itemView.findViewById(R.id.main_name)
+        desc = itemView.findViewById(R.id.card_description)
     }
 
     override fun bindView(item: CardItem, payloads: MutableList<Any>) {
-        name.text = item.card.name + item.card.id
+        name.text = item.card.name
+        println(item.card.image)
         Picasso
             .get()
             .load(item.card.image)
@@ -29,12 +32,13 @@ class CardItemViewHolder(itemView: View): FastAdapter.ViewHolder<CardItem>(itemV
 
     override fun unbindView(item: CardItem) {
         name.text = ""
+        desc.text = ""
         image.setImageBitmap(null)
     }
 }
 
 class CardItem(val card: Card): AbstractItem<CardItem, CardItemViewHolder>() {
-    override fun getType() = card.id.toInt()
+    override fun getType() = 0
 
     override fun getViewHolder(v: View) = CardItemViewHolder(v)
 

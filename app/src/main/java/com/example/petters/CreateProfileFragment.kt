@@ -289,22 +289,26 @@ class CreateProfileFragment: Fragment() {
         val data = bytes.toByteArray()
         val uuid = UUID.randomUUID().toString()
 
-        FirebaseStorage
+        val ref = FirebaseStorage
             .getInstance()
             .getReference("/profilePicutres/$uuid")
+
+        ref
             .putBytes(data)
             .addOnFailureListener {
                 println(it.message)
             }
             .addOnSuccessListener {
-                saveUser(CreateProfileInfo(
-                    petName = name.text.toString(),
-                    petDescription = description.text.toString(),
-                    petBirth = dateOfBirth.text.toString(),
-                    petGender = genderSpinner.selectedItem.toString(),
-                    petType = typeSpinner.selectedItem.toString(),
-                    profilePicture = it.uploadSessionUri.toString()
-                ))
+                ref.downloadUrl.addOnSuccessListener {
+                    saveUser(CreateProfileInfo(
+                        petName = name.text.toString(),
+                        petDescription = description.text.toString(),
+                        petBirth = dateOfBirth.text.toString(),
+                        petGender = genderSpinner.selectedItem.toString(),
+                        petType = typeSpinner.selectedItem.toString(),
+                        profilePicture = it.toString()
+                    ))
+                }
             }
     }
 
