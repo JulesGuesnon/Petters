@@ -9,10 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.yuyakaido.android.cardstackview.*
@@ -63,47 +60,90 @@ class MainFragment: Fragment(), CardStackListener {
         cardStackView.adapter = fastAdapter
 
 
-        FirebaseDatabase
+        val usersRef = FirebaseDatabase
             .getInstance()
             .getReference("/users")
-            .addChildEventListener(object: ChildEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    return
-                }
 
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    return
-                }
 
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    return
-                }
+        usersRef.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                return
+            }
 
-                override fun onChildAdded(data: DataSnapshot, p1: String?) {
-                    val user = data.getValue(User::class.java)
+            override fun onDataChange(p0: DataSnapshot) {
+                val ref = FirebaseDatabase
+                    .getInstance()
+                    .getReference("/users/$selfId/liked/")
 
-                    if (user == null) return
-                    if (user.uid == FirebaseAuth.getInstance().currentUser?.uid) return
+                ref.addChildEventListener(object: ChildEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        return
+                    }
 
-                    FirebaseDatabase
-                        .getInstance()
-                        .getReference("users/us")
-                    val card = Card(
-                        uid = user.uid,
-                        name = user.petName,
-                        image = user.profilePicture,
-                        description = user.petDescription
-                    )
+                    override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                        return
+                    }
 
-                    itemAdapter.add(CardItem(card))
-                    users.add(card)
-                }
+                    override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                        return
+                    }
 
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    return
-                }
+                    override fun onChildAdded(data: DataSnapshot, p1: String?) {
+                        val uid = data.getValue(String::class.java)
+                        if (uid == null) return
 
-            })
+                        val i = users.map { it.uid }.indexOf(uid)
+                        if (i == -1) return
+                        users.removeAt(i)
+
+                        // It's gross
+                        itemAdapter.clear()
+                        users.forEach {
+                            itemAdapter.add(CardItem(it))
+                        }
+                    }
+
+                    override fun onChildRemoved(p0: DataSnapshot) {
+                        return
+                    }
+
+                })
+            }
+
+        })
+        usersRef.addChildEventListener(object: ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                return
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                return
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                return
+            }
+
+            override fun onChildAdded(data: DataSnapshot, p1: String?) {
+                val user = data.getValue(User::class.java)
+
+                if (user == null) return
+                if (user.uid == FirebaseAuth.getInstance().currentUser?.uid) return
+
+                val card = Card(
+                    uid = user.uid,
+                    name = user.petName,
+                    image = user.profilePicture,
+                    description = user.petDescription
+                )
+                users.add(card)
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+                return
+            }
+
+        })
 
         return view
     }
