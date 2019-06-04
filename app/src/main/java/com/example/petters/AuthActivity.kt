@@ -10,7 +10,6 @@ class AuthActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
         val isAuth = !(FirebaseAuth.getInstance().currentUser?.isAnonymous ?: true)
         if (isAuth) {
             val intent = Intent(this, MainActivity::class.java)

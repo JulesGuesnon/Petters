@@ -75,6 +75,10 @@ class MainFragment: Fragment(), CardStackListener {
                     .getInstance()
                     .getReference("/users/$selfId/liked/")
 
+                users.forEach {
+                    itemAdapter.add(CardItem(it))
+                }
+
                 ref.addChildEventListener(object: ChildEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         return
@@ -94,7 +98,11 @@ class MainFragment: Fragment(), CardStackListener {
 
                         val i = users.map { it.uid }.indexOf(uid)
                         if (i == -1) return
+                        println(users)
+                        println(i)
+                        println("REMOVE")
                         users.removeAt(i)
+
 
                         // It's gross
                         itemAdapter.clear()
