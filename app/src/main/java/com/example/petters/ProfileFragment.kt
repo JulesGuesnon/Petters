@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_createprofile.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -48,6 +49,13 @@ class ProfileFragment: Fragment() {
                 }, year, month, day
             )
             dpd.show()
+        }
+
+        val signoutButton = view.findViewById<TextView>(R.id.edit_profile_logout)
+        signoutButton.setOnClickListener(){
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(activity, AuthActivity::class.java)
+            startActivity(intent)
         }
 
         val typeSpinner: Spinner = view.findViewById(R.id.edit_profile_type_placeholder)
