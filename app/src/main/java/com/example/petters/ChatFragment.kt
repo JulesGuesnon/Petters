@@ -19,13 +19,10 @@ import models.User
 
 class ChatFragment(val router: Router): Fragment() {
 
+    val selfUid = FirebaseAuth.getInstance().currentUser?.uid
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
-
-        FirebaseAuth.getInstance().signInWithEmailAndPassword("hihi@hihi.fr", "aaaaaa")
-            .addOnCompleteListener {
-                println(it.result?.user?.uid)
-            }
 
         val recycler = view.findViewById<RecyclerView>(R.id.chat_recycler)
 
@@ -41,7 +38,8 @@ class ChatFragment(val router: Router): Fragment() {
         recycler.layoutManager = layout
         recycler.adapter = fastAdapter
 
-        FirebaseDatabase.getInstance().getReference("/users")
+        FirebaseDatabase.getInstance()
+            .getReference("/users/$selfUid/matched")
             .addChildEventListener(object: ChildEventListener {
                 override fun onChildMoved(p0: DataSnapshot, p1: String?) {
                     return
@@ -52,12 +50,40 @@ class ChatFragment(val router: Router): Fragment() {
                 }
 
                 override fun onChildAdded(item: DataSnapshot, p1: String?) {
-                    val user = item.getValue(User::class.java)
-                    if (user == null) return
-                    println(user)
-                    itemAdapter.add(
-                        ChatUserItem(user)
-                    )
+                    val uid = item.getValue(String::class.java)
+
+                    if (uid == null) return
+
+                    FirebaseDatabase.getInstance()
+                        .getReference("/users")
+                        .addChildEventListener(object: ChildEventListener {
+                            override fun onCancelled(p0: DatabaseError) {
+                                return
+                            }
+
+                            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                                return
+                            }
+
+                            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                                return
+                            }
+
+                            override fun onChildAdded(data: DataSnapshot, p1: String?) {
+                                val user = data.getValue(User::class.java)
+                                if (user == null) return
+                                if (user.uid != uid) return
+
+                                itemAdapter.add(
+                                    ChatUserItem(user)
+                                )
+                            }
+
+                            override fun onChildRemoved(p0: DataSnapshot) {
+                                return
+                            }
+
+                        })
                 }
 
                 override fun onChildRemoved(p0: DataSnapshot) {

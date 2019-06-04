@@ -22,7 +22,6 @@ class CardItemViewHolder(itemView: View): FastAdapter.ViewHolder<CardItem>(itemV
 
     override fun bindView(item: CardItem, payloads: MutableList<Any>) {
         name.text = item.card.name
-        println(item.card.image)
         Picasso
             .get()
             .load(item.card.image)

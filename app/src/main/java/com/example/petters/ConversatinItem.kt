@@ -37,13 +37,10 @@ class ConversationItem(val message: Message): AbstractItem<ConversationItem, Con
     override fun getViewHolder(v: View) = ConversatinItemViewHolder(v)
 
     override fun getLayoutRes(): Int {
-        println(message.content)
         if (message.fromUid == FirebaseAuth.getInstance().currentUser?.uid) {
-            println("SELF MESSAGE")
             return R.layout.row_self_message
         }
         else {
-            println("OTHER MESSAGE")
             return R.layout.row_other_message
         }
     }

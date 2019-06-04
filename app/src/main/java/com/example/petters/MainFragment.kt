@@ -8,6 +8,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,14 +23,16 @@ class MainFragment: Fragment(), CardStackListener {
 
     lateinit var cardStackView: CardStackView
     lateinit var manager: CardStackLayoutManager
+    lateinit var itemAdapter: ItemAdapter<CardItem>
     var users = mutableListOf<Card>()
+    val selfId = FirebaseAuth.getInstance().currentUser?.uid
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_hello, container, false)
 
         cardStackView = view.findViewById<CardStackView>(R.id.main_card_stack_view)
 
-        val itemAdapter = ItemAdapter<CardItem>()
+        itemAdapter = ItemAdapter<CardItem>()
         val fastAdapter = FastAdapter.with<CardItem, ItemAdapter<CardItem>>(itemAdapter)
 
         manager = CardStackLayoutManager(activity, this)
@@ -80,7 +83,11 @@ class MainFragment: Fragment(), CardStackListener {
                     val user = data.getValue(User::class.java)
 
                     if (user == null) return
+                    if (user.uid == FirebaseAuth.getInstance().currentUser?.uid) return
 
+                    FirebaseDatabase
+                        .getInstance()
+                        .getReference("users/us")
                     val card = Card(
                         uid = user.uid,
                         name = user.petName,
@@ -135,10 +142,62 @@ class MainFragment: Fragment(), CardStackListener {
     }
 
     fun likeUser() {
-        println(
-            users[
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid == null) return
+
+        val user = getUser()
+        FirebaseDatabase
+            .getInstance()
+            .getReference("users/$uid/liked/${user.uid}")
+            .setValue(user.uid)
+
+        FirebaseDatabase
+            .getInstance()
+            .getReference("/users/${user.uid}/liked")
+            .addChildEventListener(object: ChildEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    return
+                }
+
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    return
+                }
+
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    return
+                }
+
+                override fun onChildAdded(data: DataSnapshot, p1: String?) {
+                    val uid = data.getValue(String::class.java)
+                    val selfUid = FirebaseAuth.getInstance().currentUser?.uid
+
+                    println(uid)
+                    println(selfUid)
+
+                    if (uid == selfUid) {
+                        FirebaseDatabase
+                            .getInstance()
+                            .getReference("users/$uid/matched/${user.uid}")
+                            .setValue(user.uid)
+
+                        FirebaseDatabase
+                            .getInstance()
+                            .getReference("users/$selfUid/matched/${user.uid}")
+                            .setValue(user.uid)
+                    }
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    return
+                }
+
+            })
+
+    }
+
+    fun getUser(): Card {
+        return users[
                 manager.topPosition - 1
-            ]
-        )
+        ]
     }
 }

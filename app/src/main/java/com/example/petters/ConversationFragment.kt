@@ -63,8 +63,6 @@ class ConversationFragment(otherUid: String): Fragment() {
                         (msg.toUid == selfUid && msg.fromUid == otherUid) ||
                         (msg.toUid == otherUid && msg.fromUid == selfUid)
                     ) {
-                        println(msg.content)
-
                         itemAdapter.add(
                             0,
                             ConversationItem(msg)

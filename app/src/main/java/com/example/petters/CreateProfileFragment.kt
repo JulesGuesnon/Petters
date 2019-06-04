@@ -25,6 +25,7 @@ import models.SignUpUser
 import models.User
 
 import java.io.ByteArrayOutputStream
+import kotlin.collections.HashMap
 
 class CreateProfileFragment: Fragment() {
 
@@ -141,10 +142,8 @@ class CreateProfileFragment: Fragment() {
                 profilePicEmpty.visibility = View.INVISIBLE
             }
 
-            println("AVANT ERROR")
             if (hasError) return@setOnClickListener
 
-            println("AVANT AUTH")
             if (FirebaseAuth.getInstance().currentUser?.uid == null) return@setOnClickListener
 
             saveImage(imageBitmap)
@@ -263,7 +262,9 @@ class CreateProfileFragment: Fragment() {
                     petBirth = information.petBirth,
                     petName = information.petName,
                     petDescription = information.petDescription,
-                    profilePicture = information.profilePicture
+                    profilePicture = information.profilePicture,
+                    matched = HashMap(),
+                    liked = HashMap()
                 )
 
                 userRef
