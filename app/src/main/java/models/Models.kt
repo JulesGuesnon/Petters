@@ -13,8 +13,8 @@ data class Message (val fromUid: String, val toUid: String, val content: String,
     constructor(): this("", "", "", System.currentTimeMillis())
 }
 
-data class Card (val name: String, val image: String = "https://images.pexels.com/photos/371633/pexels-photo-371633.jpeg") {
-    constructor(): this("SUDO LE CHIEN")
+data class Card (val id: String, val name: String, val image: String = "https://images.pexels.com/photos/371633/pexels-photo-371633.jpeg") {
+    constructor(): this("", "SUDO LE CHIEN")
 }
 
 data class CreateProfileInfo (val petName: String, val petDescription: String, val petBirth: String, val petType: String, val petGender: String, val profilePicture: String) {

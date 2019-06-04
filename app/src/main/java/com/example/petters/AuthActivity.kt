@@ -11,7 +11,6 @@ class AuthActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        FirebaseAuth.getInstance().signOut()
         val isAuth = !(FirebaseAuth.getInstance().currentUser?.isAnonymous ?: true)
         if (isAuth) {
             val intent = Intent(this, MainActivity::class.java)

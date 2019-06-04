@@ -19,7 +19,7 @@ class CardItemViewHolder(itemView: View): FastAdapter.ViewHolder<CardItem>(itemV
     }
 
     override fun bindView(item: CardItem, payloads: MutableList<Any>) {
-        name.text = item.card.name
+        name.text = item.card.name + item.card.id
         Picasso
             .get()
             .load(item.card.image)
@@ -34,7 +34,7 @@ class CardItemViewHolder(itemView: View): FastAdapter.ViewHolder<CardItem>(itemV
 }
 
 class CardItem(val card: Card): AbstractItem<CardItem, CardItemViewHolder>() {
-    override fun getType() = 0
+    override fun getType() = card.id.toInt()
 
     override fun getViewHolder(v: View) = CardItemViewHolder(v)
 
