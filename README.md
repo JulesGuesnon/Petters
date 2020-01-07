@@ -11,7 +11,7 @@ Here's a a video with a quick tour of the application: https://julesguesnon.com/
 - The profile part is not implemented
 - It was the first time we were doing a "real" Android project, so it's a bit buggy and the things we did would probably not be done the same way now.
 
-## Contributors
+## :heart: Contributors
 
 I didn't make this alone, so thanks to:
 
