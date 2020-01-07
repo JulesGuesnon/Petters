@@ -31,7 +31,7 @@ class ChatFragment(val router: Router): Fragment() {
         val fastAdapter = FastAdapter.with<ChatUserItem, ItemAdapter<ChatUserItem>>(itemAdapter)
 
         fastAdapter.withOnClickListener { _, _, adapter, _ ->
-            router.goTo("/conversation", adapter.user.uid)
+            router.goTo(Routes.CONVERSATION, adapter.user.uid)
             true
         }
 

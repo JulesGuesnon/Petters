@@ -1,12 +1,10 @@
 package com.example.petters
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,14 +38,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         if (item?.itemId ==  R.id.navChat) {
-            router.goTo("/chat")
+            router.goTo(Routes.CHAT)
         }
         else {
            when(router.route) {
-               "/" -> router.goTo("/profile")
-               "/profile" -> router.goTo("/")
-               "/chat" -> router.goTo("/")
-               "/conversation" -> router.goTo("/chat")
+               Routes.ROOT -> router.goTo(Routes.PROFILE)
+               Routes.PROFILE -> router.goTo(Routes.ROOT)
+               Routes.CHAT -> router.goTo(Routes.ROOT)
+               Routes.CONVERSATION -> router.goTo(Routes.CHAT)
            }
         }
 

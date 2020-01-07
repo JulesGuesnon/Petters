@@ -9,29 +9,36 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+enum class Routes {
+    ROOT,
+    PROFILE,
+    CHAT,
+    CONVERSATION
+}
+
 class Router {
-    var route = "/"
+    var route = Routes.ROOT
     lateinit var menu: Menu
     lateinit var supportActionBar: ActionBar
     lateinit var supportFragmentManager: FragmentManager
     lateinit var fragmentContainer: LinearLayout
 
-    fun goTo(newRoute: String, arg: Any = "")  {
+    fun goTo(newRoute: Routes, arg: Any = "")  {
         when(newRoute) {
-            "/" -> {
-                if (route == "/profile")
+            Routes.ROOT -> {
+                if (route == Routes.ROOT)
                     goHome(false)
                 else
                     goHome()
             }
-            "/chat" -> {
-                if (route == "/conversation")
+            Routes.CHAT -> {
+                if (route == Routes.CONVERSATION)
                     goChat()
                 else
                     goChat(false)
 
             }
-            "/profile" -> {
+            Routes.PROFILE -> {
                 setBackMenu()
                 supportFragmentManager
                     .beginTransaction()
@@ -40,7 +47,7 @@ class Router {
                     .addToBackStack("test")
                     .commit()
             }
-            "/conversation" -> {
+            Routes.CONVERSATION -> {
                 supportFragmentManager
                     .beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
